@@ -20,6 +20,7 @@ app.use(cors());
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/blog", require("./routes/blogRoutes"));
 app.use("/api/v1/home", require("./routes/homeRoutes"));
+app.use("/api/v1/comments", require("./routes/commentRoutes"));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`.bgMagenta);

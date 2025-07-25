@@ -14,10 +14,16 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    viewcount: {
+    likecount: {
       type: Number,
       default: 0,
     },
+    likedBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
+    ],
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
