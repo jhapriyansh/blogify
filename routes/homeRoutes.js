@@ -13,5 +13,5 @@ router.post("/feed", authMiddleware, mainFeedController);
 router.post("/likePost", authMiddleware, likesController);
 router.post("/dislikePost", authMiddleware, dislikesController);
 router.post("/postComment", authMiddleware, postCommentController);
-router.delete("/deleteComment", authMiddleware, deleteCommentController)
+router.delete("/deleteComment", authMiddleware, deleteCommentController);
 module.exports = router;
