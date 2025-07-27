@@ -1,6 +1,6 @@
-# 📝 MERN Blog App
+# 📝 Blog API
 
-A full-stack blog application built using the **MERN stack (MongoDB, Express, React, Node.js)**. Users can create blog posts, comment on them, and view all comments associated with a post.
+A blog API built using the **MongoDB, Express, Node.js**. Users can create blog posts, comment on them, and view all comments associated with a post.
 
 ## 📌 Features
 
@@ -13,7 +13,6 @@ A full-stack blog application built using the **MERN stack (MongoDB, Express, Re
 
 ## 🛠️ Technologies
 
-* **Frontend:** React, Axios, TailwindCSS
 * **Backend:** Node.js, Express.js
 * **Database:** MongoDB with Mongoose ODM
 * **Other:** dotenv, cors, nodemon, mongoose
