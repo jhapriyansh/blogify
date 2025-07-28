@@ -11,10 +11,10 @@ const mainFeedController = async (req, res) => {
       });
     }
     const feed = await blogModel.find({ createdBy: { $ne: userId } });
+    feed.reverse();
     return res.status(200).send({
       success: true,
       message: "Feed",
-      userId,
       feed,
     });
   } catch (error) {
@@ -142,53 +142,6 @@ const postCommentController = async (req, res) => {
   }
 };
 
-const deleteCommentController = async (req, res) => {
-  try {
-    const { postId, commentId } = req.body;
-    console.log("DELETE COMMENT API HIT", { postId, commentId });
-    if (!postId || !commentId) {
-      return res.status(400).send({
-        success: false,
-        message: "Missing arguments",
-      });
-    }
-    const post = await blogModel.findById(postId);
-    if (!post) {
-      return res.status(404).send({
-        success: false,
-        message: "Post not found",
-      });
-    }
-    const comment = await commentsModel.findByIdAndDelete(commentId);
-    console.log("Deleted comment:", comment);
-    if (!comment) {
-      return res.status(404).send({
-        success: false,
-        message: "Comment not found",
-      });
-    }
-    const strCommentId = commentId.toString();
-    post.comments = post.comments.filter(
-      (id) => id.toString() !== strCommentId
-    );
-    post.markModified("comments");
-    const result = await post.save();
-    return res.status(200).send({
-      success: true,
-      message: "Comment Deleted",
-      comment,
-      result,
-    });
-
-  } catch (error) {
-    console.error("Delete Comment Error:", error);
-    return res.status(500).send({
-      success: false,
-      message: "Delete comment API error",
-      error,
-    });
-  }
-};
 
 
 module.exports = {
@@ -196,5 +149,4 @@ module.exports = {
   likesController,
   dislikesController,
   postCommentController,
-  deleteCommentController,
 };

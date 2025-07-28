@@ -1,4 +1,5 @@
 const blogModel = require("../models/blogModel");
+const commentsModel = require("../models/commentsModel");
 
 const createBlogController = async (req, res) => {
   try {
@@ -59,6 +60,9 @@ const deleteBlogController = async (req, res) => {
         success: false,
         message: "No blog with this id",
       });
+    }
+    while (await commentsModel.findOne({ post: id })) {
+      await commentsModel.findOneAndDelete({ post: id });
     }
     return res.status(200).send({
       success: true,

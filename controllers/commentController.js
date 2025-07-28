@@ -42,4 +42,40 @@ const getPostComments = async (req, res) => {
   }
 };
 
-module.exports = { getPostComments };
+const getUserComments = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userComments = await commentsModel.find({ user: userId });
+    if (!userComments) {
+      return res.status(404).send({
+        success: false,
+        message: "User has no comments",
+      });
+    }
+    const commentPosts = [];
+    for (let index = 0; index < userComments.length; index++) {
+      const post = await blogModel.findById(userComments[index].post);
+      if (post) {
+        commentPosts.push({
+          post,
+          comment: userComments[index],
+        });
+      }
+    }
+    return res.status(200).send({
+      success: true,
+      message: "Here",
+      commentPosts,
+      userComments,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "get comments api error",
+      error,
+    });
+  }
+};
+
+module.exports = { getPostComments, getUserComments };
