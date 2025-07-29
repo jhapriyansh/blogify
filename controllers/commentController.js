@@ -66,7 +66,6 @@ const getUserComments = async (req, res) => {
       success: true,
       message: "Here",
       commentPosts,
-      userComments,
     });
   } catch (error) {
     console.log(error);
